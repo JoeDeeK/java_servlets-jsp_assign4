@@ -1,0 +1,17 @@
+/* 
+    Created on : Jul 21, 2016, 7:30:01 PM
+    Author     : Jody Kirton
+*/
+
+h1{
+    color: blue;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px black solid;
+    padding: 5px; 
+}
