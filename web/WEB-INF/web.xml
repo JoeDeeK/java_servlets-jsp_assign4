@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="tomcat-demo" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <servlet>
+        <servlet-name>ProductMaintenanceServlet</servlet-name>
+        <servlet-class>Controller.ProductMaintenanceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductMaintenanceServlet</servlet-name>
+        <url-pattern>/ProductMaintenanceServlet</url-pattern>
+    </servlet-mapping>
+    
+    <security-role>
+        <role-name>manager</role-name>
+    </security-role>
+    <security-role>
+        <role-name>cashier</role-name>
+    </security-role>
+    <security-role>
+        <role-name>shelver</role-name>
+    </security-role>
+    
+    <security-constraint>
+        <display-name>ManagerConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>ManagerFiles</web-resource-name>
+            <url-pattern>/manager/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>manager</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>CashierConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>CashierFiles</web-resource-name>
+            <url-pattern>/cashier/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>cashier</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>ShelverConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>ShelverFiles</web-resource-name>
+            <url-pattern>/shelver/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>shelver</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>UserDatabase</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
